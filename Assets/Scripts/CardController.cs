@@ -5,7 +5,12 @@ using TMPro;
 
 public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public int Cost = 1;
+    public int ID;
+    public string Name;
+    public int Type;
+    public int Cost;
+    public int Value;
+    public string Tooltip;
 
     private Vector2 defaultPos;
     private Quaternion defaultRot;
@@ -13,6 +18,8 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     private CanvasGroup canvasGroup;
     private PlayerController playerController;
     public TextMeshProUGUI CostText;
+    public TextMeshProUGUI tooltipText;
+    public TextMeshProUGUI nameText;
     public HandManager HandManager;
     private CardMovement cardMovement;
     private void Awake()
@@ -22,14 +29,23 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         playerController = FindAnyObjectByType<PlayerController>();
         HandManager = FindAnyObjectByType<HandManager>();
         cardMovement = GetComponent<CardMovement>();
-        ShowCost();
     }
+
+    public void Init(CardData cardData)
+    {
+        this.ID = cardData.ID;
+        this.Name = cardData.Name;
+        this.Type = cardData.Type;
+        this.Cost = cardData.Cost;
+        this.Value = cardData.Value;
+        this.Tooltip = cardData.Tooltip;
+    }
+
     public void ShowCost()
     {
-        if(CostText != null)
-        {
-            CostText.text = Cost.ToString();
-        }
+        nameText.text = Name.ToString();
+        CostText.text = Cost.ToString();
+        tooltipText.text = Tooltip.ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

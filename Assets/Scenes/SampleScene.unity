@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &18840292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18840294}
+  - component: {fileID: 18840293}
+  m_Layer: 0
+  m_Name: LoadCards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &18840293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18840292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d1e9051b1e88749ad3955e41284884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards: []
+  cardDatabase: {fileID: 0}
+--- !u!4 &18840294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18840292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.76647, y: -15.78878, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &232323079
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,8 +700,8 @@ Transform:
   m_GameObject: {fileID: 517401854}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.84, y: -15.71, z: 0}
-  m_LocalScale: {x: 2.3403285, y: 1.9604893, z: 1}
+  m_LocalPosition: {x: 7.84, y: -15.69, z: 0}
+  m_LocalScale: {x: 2.3866668, y: 1.9865637, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1372,6 +1418,18 @@ MonoBehaviour:
   handArea: {fileID: 1752071622}
   radius: 400
   maxHandSize: 6
+  cards:
+  - {fileID: 11400000, guid: 34e9858b582cff84891cab56ff796217, type: 2}
+  - {fileID: 11400000, guid: d50b5ed919b75cf44a30f728fb7103f9, type: 2}
+  - {fileID: 11400000, guid: d16bbdc06d823f34f9b6bdb417229f3a, type: 2}
+  - {fileID: 11400000, guid: fd8f35e4f357cbb449861eff33363910, type: 2}
+  - {fileID: 11400000, guid: ceab7b7d0eb91064da9499233b71de5a, type: 2}
+  - {fileID: 11400000, guid: fe24c923bd31f9546bd10856072eaf06, type: 2}
+  - {fileID: 11400000, guid: 8d0c782f6bd872644b6d84716a3a89fc, type: 2}
+  - {fileID: 11400000, guid: 3b55db4b237ad144781e07e4c0de9a8f, type: 2}
+  - {fileID: 11400000, guid: e119bf48a3023f5478ada53e756d2f6d, type: 2}
+  - {fileID: 11400000, guid: ccbe38d71cd394547a6cd891ce68dac7, type: 2}
+  - {fileID: 11400000, guid: 4bf82ab1d8ae67b46bdc0a97cf650b06, type: 2}
 --- !u!1 &1743714645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1443,7 @@ GameObject:
   - component: {fileID: 1743714648}
   - component: {fileID: 1743714647}
   m_Layer: 5
-  m_Name: Draw
+  m_Name: Drawbtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1554,7 +1612,7 @@ GameObject:
   - component: {fileID: 2003422503}
   - component: {fileID: 2003422502}
   m_Layer: 5
-  m_Name: TurnEnd
+  m_Name: TurnEndbtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1699,3 +1757,4 @@ SceneRoots:
   - {fileID: 335722640}
   - {fileID: 1380218328}
   - {fileID: 1456863264}
+  - {fileID: 18840294}

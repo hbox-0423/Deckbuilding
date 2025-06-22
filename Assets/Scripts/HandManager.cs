@@ -9,7 +9,7 @@ public class HandManager : MonoBehaviour
     public int maxHandSize = 6;
 
     private List<Transform> cardsInHand = new List<Transform>();
-
+    [SerializeField] private List<CardData> cards = new List<CardData>();
     public void DrawCard()
     {
         if(cardsInHand.Count >= maxHandSize)
@@ -18,7 +18,10 @@ public class HandManager : MonoBehaviour
             return;
         }
         GameObject newCard = Instantiate(cardPrefab, handArea);
+        newCard.GetComponent<CardController>().Init(cards[Random.Range(0, cards.Count)]);
+        newCard.GetComponent<CardController>().ShowCost();
         cardsInHand.Add(newCard.transform);
+        
         ArrangeCards();
     }
 
