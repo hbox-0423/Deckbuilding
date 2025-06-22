@@ -57,7 +57,7 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         // 새 Input System 사용 시 마우스 위치 가져오기
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        // 2D 레이어 마스크 (Monster 레이어만 검사)
+        // 2D 레이어 마스크
         LayerMask monsterLayer = LayerMask.GetMask("Monster");
 
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, 0f, monsterLayer);

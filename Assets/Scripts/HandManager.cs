@@ -38,7 +38,7 @@ public class HandManager : MonoBehaviour
 
             Vector2 pos = new Vector2(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius - radius);
 
-            // 여기서 바로 위치 적용 대신, 목표 위치만 지정
+            
             CardMovement cardMove = cardsInHand[i].GetComponent<CardMovement>();
             if (cardMove != null)
                 cardMove.SetTargetPosition(pos);
