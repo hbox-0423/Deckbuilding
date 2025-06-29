@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
+using UnityEditor.U2D;
 
 public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -11,17 +13,22 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public int Cost;
     public int Value;
     public string Tooltip;
+    public Image CardImage;
 
     private Vector2 defaultPos;
     private Quaternion defaultRot;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private PlayerController playerController;
+
     public TextMeshProUGUI CostText;
     public TextMeshProUGUI tooltipText;
     public TextMeshProUGUI nameText;
+    
+
     public HandManager HandManager;
     private CardMovement cardMovement;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -39,6 +46,7 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         this.Cost = cardData.Cost;
         this.Value = cardData.Value;
         this.Tooltip = cardData.Tooltip;
+        this.CardImage.sprite = cardData.Sprite;
     }
 
     public void ShowCost()
@@ -46,6 +54,7 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         nameText.text = Name.ToString();
         CostText.text = Cost.ToString();
         tooltipText.text = Tooltip.ToString();
+        CardImage.sprite = CardImage.sprite;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -69,14 +78,16 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         cardMovement.isBeingDragged = false;
 
         canvasGroup.blocksRaycasts = true;
-
-        // 새 Input System 사용 시 마우스 위치 가져오기
+        
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        // 2D 레이어 마스크
         LayerMask monsterLayer = LayerMask.GetMask("Monster");
 
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero, 0f, monsterLayer);
+
+        LayerMask playerLayer = LayerMask.GetMask("player");
+
+        RaycastHit2D self = Physics2D.Raycast(worldPos, Vector2.zero, 0f, playerLayer);
 
         if (hit.collider != null)
         {
@@ -88,15 +99,30 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
                 {
                     monster.TakeDamage(10);  // 데미지 10 고정 예시
                     HandManager.RemoveCard(this.transform);
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
+                    this.gameObject.SetActive(false);
                 }
             }
-
+        }
+        else if (self.collider != null)
+        {
+            Debug.Log("버프 사용!");
+            if (playerController.UseCost(Cost))
+            {
+                PlayerController player =  self.collider.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    HandManager.RemoveCard(this.transform);
+                    //Destroy(gameObject);
+                    this.gameObject.SetActive(false);
+                }
+            }
         }
         else
         {
             Debug.Log("몬스터 없음");
         }
+        
 
         // 드래그 끝났으니 카드 원위치
         rectTransform.anchoredPosition = defaultPos;

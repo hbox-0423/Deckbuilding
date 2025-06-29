@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 public class HandManager : MonoBehaviour
 {
-    public GameObject cardPrefab;
+    //public GameObject cardPrefab;
     public Transform handArea;
     public float radius = 400f;
     public int maxHandSize = 6;
 
     private List<Transform> cardsInHand = new List<Transform>();
     [SerializeField] private List<CardData> cards = new List<CardData>();
+    [SerializeField] private Pooling cardPool;
     public void DrawCard()
     {
         if(cardsInHand.Count >= maxHandSize)
@@ -17,11 +18,27 @@ public class HandManager : MonoBehaviour
             Debug.Log("ÇÚµå°¡ °¡µæ Ã¡½À´Ï´Ù!");
             return;
         }
-        GameObject newCard = Instantiate(cardPrefab, handArea);
-        newCard.GetComponent<CardController>().Init(cards[Random.Range(0, cards.Count)]);
-        newCard.GetComponent<CardController>().ShowCost();
+        //GameObject newCard = Instantiate(cardPrefab, handArea);
+        GameObject newCard = cardPool.Get();
+        newCard.transform.SetParent(handArea,false);
+        newCard.transform.localScale = Vector3.one;
+
+        newCard.transform.localPosition = Vector3.zero;
+        newCard.transform.localRotation = Quaternion.identity;
+
+        //newCard.GetComponent<CardController>().Init(cards[Random.Range(0, cards.Count)]);
+        //newCard.GetComponent<CardController>().ShowCost();
+        CardData data = cards[Random.Range(0, cards.Count)];
+        CardController controller = newCard.GetComponent<CardController>();
+        controller.Init(data);
+        controller.ShowCost();
+
+        CardMovement move = newCard.GetComponent<CardMovement>();
+        if (move != null)
+            move.targetPosition = Vector2.zero;
+
         cardsInHand.Add(newCard.transform);
-        
+
         ArrangeCards();
     }
 
@@ -48,6 +65,8 @@ public class HandManager : MonoBehaviour
 
             float rotationZ = -angle * 0.5f;
             cardsInHand[i].localRotation = Quaternion.Euler(0f, 0f, rotationZ);
+
+            cardsInHand[i].SetSiblingIndex(i);
         }
     }
 
@@ -56,4 +75,5 @@ public class HandManager : MonoBehaviour
         cardsInHand.Remove(card);
         ArrangeCards();
     }
+
 }

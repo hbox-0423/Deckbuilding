@@ -8,6 +8,7 @@ public class CardMovement : MonoBehaviour
 
     private RectTransform rectTransform;
 
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();

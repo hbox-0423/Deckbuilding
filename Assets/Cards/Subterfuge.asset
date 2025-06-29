@@ -19,3 +19,4 @@ MonoBehaviour:
   Value: 5
   Tooltip: "5\uC758 \uBC29\uC5B4\uB3C4\uB97C \uC5BB\uACE0 \uCE74\uB4DC\uB97C \uD55C
     \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+  Sprite: {fileID: 21300000, guid: 4868af0b4db9f2c4ca07b93f37f8e5b1, type: 3}

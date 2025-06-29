@@ -48,9 +48,10 @@ public class LoadCards : MonoBehaviour
                 int cost = int.Parse(fields[4]);
                 int value = int.Parse(fields[5]);
                 string tooltip = fields[6];
+                Sprite sprite = null;
 
                 CardData cardData = ScriptableObject.CreateInstance<CardData>();
-                cardData.Init(ID, name, type, cost, value, tooltip);
+                cardData.Init(ID, name, type, cost, value, tooltip, sprite);
                 cards.Add(cardData);
                 Debug.Log(cardData);
             }

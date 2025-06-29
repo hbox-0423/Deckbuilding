@@ -7,6 +7,7 @@ public class TurnManager : MonoBehaviour
     public Button endTurnButton;
     public TMP_Text state;
     public PlayerController playerController;
+    public HandManager handManager;
     public enum TurnState
     {
         PlayerTurn,
@@ -17,15 +18,32 @@ public class TurnManager : MonoBehaviour
 
     void Start()
     {
-        StartPlayerTurn();
+        FirstTurn();
     }
 
+    public void FirstTurn()
+    {
+        currentState = TurnState.PlayerTurn;
+        Debug.Log("플레이어 턴 시작");
+
+        playerController.ResetCost();
+        for (int i = 0; i < 4; i++)
+        {
+            handManager.DrawCard();
+        }
+
+    }
     public void StartPlayerTurn()
     {
         currentState = TurnState.PlayerTurn;
         Debug.Log("플레이어 턴 시작");
 
         playerController.ResetCost();
+        for (int i = 0; i < 2; i++)
+        {
+            handManager.DrawCard();
+        }
+
 
         endTurnButton.interactable = true;
         state.text = "Turn End";
@@ -35,6 +53,7 @@ public class TurnManager : MonoBehaviour
     {
         currentState = TurnState.EnemyTurn;
         Debug.Log("플레이어 턴 종료");
+
 
         endTurnButton.interactable = false;
         Invoke("StartEnemyTurn", 1.0f); // 1초 후 몬스터 턴 시작

@@ -18,3 +18,4 @@ MonoBehaviour:
   Cost: 2
   Value: 2
   Tooltip: "\uB2E4\uC74C \uD134\uC5D0 2\uC758 \uC5D0\uB108\uC9C0\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
+  Sprite: {fileID: 21300000, guid: 354e9c74843c58a4c8a535d3efcdb49e, type: 3}

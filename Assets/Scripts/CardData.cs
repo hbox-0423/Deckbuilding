@@ -9,8 +9,9 @@ public class CardData : ScriptableObject
     public int Cost;
     public int Value;
     public string Tooltip;
+    public Sprite Sprite;
     
-    public void Init(int id,string name, int type,int cost,int value,string tooltip)
+    public void Init(int id,string name, int type,int cost,int value,string tooltip,Sprite sprite)
     {
         this.ID = id;
         this.Name = name;
@@ -18,5 +19,6 @@ public class CardData : ScriptableObject
         this.Cost = cost;
         this.Value = value;
         this.Tooltip = tooltip;
+        this.Sprite = sprite;
     }
 }
